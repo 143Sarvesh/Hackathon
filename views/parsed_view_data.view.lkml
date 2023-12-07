@@ -44,4 +44,10 @@ view: parsed_view_data {
     type: count
     drill_fields: [model_name, view_name, field_name]
   }
+  measure: used_or_unused_count_drill {
+    label: "count of used and un-used fields"
+    type: count_distinct
+    sql:  ${used_fields};;
+    drill_fields: [model_name, view_name, field_name]
+}
 }

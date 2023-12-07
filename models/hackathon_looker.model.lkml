@@ -79,3 +79,11 @@ explore: product_sheets {
   }
 }
 explore: merged {}
+
+explore: parsed_view_data {
+  join: system_activity_history {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${parsed_view_data.used_fields} = ${system_activity_history.query_fields_used} ;;
+  }
+}

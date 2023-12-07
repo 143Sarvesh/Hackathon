@@ -44,4 +44,10 @@ view: system_activity_history {
   measure: count {
     type: count
   }
+   dimension: used_or_unused {
+    label: "Used or Un-Used"
+     type: string
+    sql:case when ${TABLE}.Query_Fields_Used is null then "Un-Used Field" else "Used Field" end  ;;
+   }
+
 }
