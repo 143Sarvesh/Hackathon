@@ -50,4 +50,15 @@ view: parsed_view_data {
     sql:  ${used_fields};;
     drill_fields: [model_name, view_name, field_name]
 }
+  measure: used_or_unused_count_drill2 {
+    label: "count of used and un-used view"
+    type: count_distinct
+    sql:  ${view_name};;
+    drill_fields: [model_name, view_name, field_name]
+  }
+  dimension: used_or_unused_view {
+    label: "Used or Un-Used View"
+    type: string
+    sql:case when ${TABLE}.view_name = 'salesperson_staging' then "Un-Used View" else "Used View" end  ;;
+  }
 }
