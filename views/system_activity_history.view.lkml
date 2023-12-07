@@ -15,14 +15,20 @@ view: system_activity_history {
     type: number
     sql: ${TABLE}.Query_Count ;;
   }
+  measure: query_count_mea {
+    label: "Query Count"
+    type: sum
+    sql: ${TABLE}.Query_Count ;;
+  }
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
   # measures for this dimension, but you can also add measures of many different aggregates.
   # Click on the type parameter to see all the options in the Quick Help panel on the right.
 
-  measure: total_query_count {
-    type: sum
-    sql: ${query_count} ;;  }
+  dimension: used_unused_view{
+    type: string
+    sql: case when ${query_count} = 0 then "Un-Used view" else "Used View" end ;;
+    }
   measure: average_query_count {
     type: average
     sql: ${query_count} ;;  }
@@ -44,10 +50,11 @@ view: system_activity_history {
   measure: count {
     type: count
   }
-   dimension: used_or_unused {
-    label: "Used or Un-Used"
+   dimension: used_or_unused_field {
+    label: "Used or Un-Used Field"
      type: string
     sql:case when ${TABLE}.Query_Fields_Used is null then "Un-Used Field" else "Used Field" end  ;;
    }
+
 
 }
